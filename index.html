@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ดาวเหิน 9 ช่อง - Flying Star Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>ตารางดาวเหิน 9 ช่อง</h1>
+            <p class="subtitle">ระบบวิเคราะห์ทิศทางและพลังงานตามลูกศรเข็มทิศ</p>
+        </header>
+
+        <div class="main-container">
+            <div class="compass-label top">ใต้ (South)</div>
+            <div class="compass-label left">ออก (East)</div>
+            <div class="compass-label right">ตก (West)</div>
+            <div class="compass-label bottom">เหนือ (North)</div>
+
+            <div class="grid-container" id="flying-star-grid">
+                <!-- Grid Cells 0-8 -->
+                <div class="cell" id="cell-0"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">SE</span></div>
+                <div class="cell" id="cell-1"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">S</span></div>
+                <div class="cell" id="cell-2"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">SW</span></div>
+                <div class="cell" id="cell-3"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">E</span></div>
+                <div class="cell" id="cell-4"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">Center</span></div>
+                <div class="cell" id="cell-5"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">W</span></div>
+                <div class="cell" id="cell-6"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">NE</span></div>
+                <div class="cell" id="cell-7"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">N</span></div>
+                <div class="cell" id="cell-8"><span class="number"></span><span class="meaning"></span><span
+                        class="direction">NW</span></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="prev-btn" class="btn secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 17l-5-5 5-5M18 17l-5-5 5-5" />
+                </svg>
+                ย้อนกลับ
+            </button>
+            <div class="center-star-display">
+                ดาวกลาง: <span id="current-center">1</span>
+            </div>
+            <button id="next-btn" class="btn primary">
+                ถัดไป
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 17l5-5-5-5M6 17l5-5-5-5" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="history-panel">
+            <h3>ลำดับการเดินดาว</h3>
+            <p>1 (กลาง) → 2 (พายัพ) → 3 (ประจิม) → 4 (อีสาน) → 5 (ทักษิณ) → 6 (อุดร) → 7 (หรดี) → 8 (บูรพา) → 9
+                (อาคเนย์)</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
