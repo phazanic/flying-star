@@ -139,6 +139,7 @@ header p {
     color: var(--gold);
     text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     z-index: 2;
+    margin-top: auto;
 }
 
 .cell .meaning {
@@ -154,8 +155,8 @@ header p {
 .cell .direction {
     font-size: 0.7rem;
     color: var(--text-secondary);
-    position: absolute;
-    bottom: 0.5rem;
+    margin-top: auto;
+    padding-bottom: 0.5rem;
     font-weight: 600;
 }
 
@@ -283,12 +284,26 @@ header p {
         padding: 1rem;
     }
 
+    .main-container {
+        padding: 1.5rem;
+    }
+
     header h1 {
         font-size: 1.8rem;
     }
 
     .cell .number {
         font-size: 2rem;
+    }
+
+    .cell .meaning {
+        font-size: 0.55rem;
+        margin-top: 2px;
+    }
+
+    .cell .direction {
+        font-size: 0.55rem;
+        padding-bottom: 0.2rem;
     }
 
     .btn {
