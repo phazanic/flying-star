@@ -95,13 +95,13 @@ header p {
 .compass-label.left {
     left: 1rem;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(0deg);
 }
 
 .compass-label.right {
     right: 1rem;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) rotate(0deg);
 }
 
 .grid-container {
@@ -281,20 +281,31 @@ header p {
     }
 
     .main-container {
-        padding: 1.5rem;
+        padding: 2.2rem;
     }
 
     header h1 {
         font-size: 1.8rem;
     }
 
-    .cell .number {
-        font-size: 2rem;
+    .compass-label.top {
+        top: 0.5rem;
     }
 
-    .cell .meaning {
-        font-size: 0.55rem;
-        margin-top: 2px;
+    .compass-label.bottom {
+        bottom: 0.5rem;
+    }
+
+    .compass-label.left {
+        left: 0.5rem;
+    }
+
+    .compass-label.right {
+        right: 0.5rem;
+    }
+
+    .cell .number {
+        font-size: 2rem;
     }
 
     .cell .meaning {
