@@ -33,7 +33,32 @@ document.addEventListener('DOMContentLoaded', () => {
         9: "ความก้าวหน้า"
     };
 
-    let currentCenterStar = 1;
+    // คำนวณดาวกลางประจำปีตามหลักฮวงจุ้ย
+    // ดาวเปลี่ยนทุกวันที่ 4 กุมภาพันธ์ (ลี่ชุน/立春)
+    // ปีอ้างอิง: 2024 = ดาว 3, ลดลงปีละ 1 (9→8→7→...→1→9)
+    function getAnnualCenterStar() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth(); // 0-indexed (Jan=0, Feb=1)
+        const day = now.getDate();
+
+        // ถ้ายังไม่ถึง 4 ก.พ. ให้ใช้ปีก่อนหน้า
+        let flyingYear = year;
+        if (month < 1 || (month === 1 && day < 4)) {
+            flyingYear = year - 1;
+        }
+
+        // ปี 2024 ดาวกลาง = 3
+        // ทุกปีลดลง 1: 2024→3, 2025→2, 2026→1, 2027→9, 2028→8, ...
+        // สูตร: star = ((3 - (flyingYear - 2024) - 1) % 9 + 9) % 9 + 1
+        const offset = flyingYear - 2024;
+        let star = ((3 - offset - 1) % 9 + 9) % 9 + 1;
+        return { star, flyingYear };
+    }
+
+    const annualData = getAnnualCenterStar();
+    let currentCenterStar = annualData.star;
+    let currentFlyingYear = annualData.flyingYear;
     let currentFacing = 'S';
     let isAnimating = false;
 
@@ -175,6 +200,14 @@ document.addEventListener('DOMContentLoaded', () => {
         currentCenterDisplay.textContent = centerStar;
     }
 
+    // อัปเดตแสดงปีที่กำลังดู
+    function updateYearDisplay() {
+        const yearDisplay = document.getElementById('year-display');
+        if (yearDisplay) {
+            yearDisplay.textContent = `พ.ศ. ${currentFlyingYear + 543} (${currentFlyingYear})`;
+        }
+    }
+
     // Rotate button (clockwise)
     rotateBtn.addEventListener('click', () => {
         if (isAnimating) return;
@@ -190,16 +223,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Next/Prev buttons
     nextBtn.addEventListener('click', () => {
         currentCenterStar = (currentCenterStar % 9) + 1;
+        currentFlyingYear++;
         updateGrid(currentCenterStar, false);
+        updateYearDisplay();
     });
 
     prevBtn.addEventListener('click', () => {
         currentCenterStar = currentCenterStar - 1;
         if (currentCenterStar < 1) currentCenterStar = 9;
+        currentFlyingYear--;
         updateGrid(currentCenterStar, false);
+        updateYearDisplay();
     });
 
     // Initial render (no animation)
     updateCompassLabels(false);
     updateGrid(currentCenterStar, false);
+    updateYearDisplay();
+
+    // ตรวจสอบอัตโนมัติทุก 60 วินาที — ถ้าข้ามปี (4 ก.พ.) จะอัปเดตดาวกลางเอง
+    setInterval(() => {
+        const { star, flyingYear } = getAnnualCenterStar();
+        if (flyingYear !== currentFlyingYear) {
+            currentCenterStar = star;
+            currentFlyingYear = flyingYear;
+            updateGrid(currentCenterStar, true);
+            updateYearDisplay();
+        }
+    }, 60000);
 });
